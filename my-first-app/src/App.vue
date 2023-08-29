@@ -1,40 +1,38 @@
 <template>
   <div :id="$style.app">
-
     <h1>{{ title }}</h1>
-<Button @click="increment">Click me</Button>
-
+    <Button @click="increment">Click me</Button>
+    <DirectivesTest></DirectivesTest>
   </div>
 </template>
 
-
 <script>
-
-import Button from './components/Button.vue'
+import Button from "./components/Button.vue";
+import DirectivesTest from "./components/DirectivesTast.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-Button
+    Button,
+    DirectivesTest,
   },
   data() {
     return {
-      amountOfClick: 0
-    }
+      amountOfClick: 0,
+    };
   },
   computed: {
     title() {
-      return `Amount of clicks ${this.amountOfClick}`
-    }
+      return `Amount of clicks ${this.amountOfClick}`;
+    },
   },
   methods: {
     increment() {
-      this.amountOfClick += 1
-    }
-  }
-}
+      this.amountOfClick += 1;
+    },
+  },
+};
 </script>
-
 
 <style module>
 #app {
