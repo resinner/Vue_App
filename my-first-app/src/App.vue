@@ -1,42 +1,48 @@
 <template>
   <div :id="$style.app">
-    <h1>{{ title }}</h1>
-    <!-- <Button @click="increment">Click me</Button> -->
-    <StarRating :rating="4.5"/>
+    <ApartmentsItem 
+    :descr="apartment.descr"
+    :price="apartment.price"
+    :rating="apartment.rating"
+    imgSrc="https://photoresources.wtatennis.com/photo-resources/2020/07/02/87020751-8eee-44fa-8105-f4057c1be863/Muchova_Hero-Smile.png?width=950"
+
+    />
   </div>
 </template>
 
 <script>
-// import Button from "./components/Button.vue";
-import StarRating from "./components/StarRating.vue";
+import ApartmentsItem from "./components/apartment/ApartmentsItem";
 
 export default {
   name: "App",
   components: {
-    // Button,
-    StarRating,
+    ApartmentsItem,
   },
   data() {
     return {
-      amountOfClick: 0,
+      apartment: {
+        id: "5f05c9dad2c9bc0f773444bc",
+        title: "Aut qui adipisci discinctio maiores molesstiae sit est inventore vero.",
+        descr: "Роскошные апартаменты в скайндинавском стиле с панорамным видом на реку и бесплатным Wi-Fi.",
+        price: 1250,
+        rating: 4.5,
+        location: {
+          city: "Kherson",
+        },
+        owner: {
+          name: "Ellen",
+          phone: "115-355-5652",
+          email: "Tracey.Morar86@hotmail.com",
+        },
+      },
     };
-  },
-  computed: {
-    title() {
-      return `Amount of clicks ${this.amountOfClick}`;
-    },
-  },
-  methods: {
-    increment() {
-      this.amountOfClick += 1;
-    },
   },
 };
 </script>
 
 <style module>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
