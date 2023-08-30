@@ -1,18 +1,21 @@
 <template>
-  <div class="apartments-item">
-  <div class="apartments-item__inner">
-    <img :src="imgSrc" alt="" class="apartments-item__photo" />
-    <div class="apartments-item__content">
-      <p class="apartments-item__description">
-        {{ descr }}
-      </p>
-      <div class="apartments-item__rating">
-        <StarRating :rating="rating" />
+  <div class="apartments-item" >
+    <div class="apartments-item__inner">
+      <img :src="imgSrc" alt="" class="apartments-item__photo" />
+      <div class="apartments-item__content">
+        <p class="apartments-item__description">
+          {{ descr }}
+        </p>
+        <div class="apartments-item__rating">
+          <StarRating :rating="rating" />
+        </div>
+        <div class="apartments-item__price">UAH {{ price }} за ночь</div>
+        <a href="https://facebook.com" @click.prevent.stop="handleLinkClick"
+          >facebook</a
+        >
       </div>
-      <div class="apartments-item__price">UAH {{ price }} за ночь</div>
     </div>
   </div>
-    </div>
 </template>
 
 <script>
@@ -39,6 +42,15 @@ export default {
     imgSrc: {
       type: String,
       default: "",
+    },
+  },
+  methods: {
+    log(index, event) {
+      console.log(index);
+      console.log(event);
+    },
+    handleLinkClick() {
+      console.log("facebook click");
     },
   },
 };

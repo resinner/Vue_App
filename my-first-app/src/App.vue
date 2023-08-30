@@ -8,6 +8,7 @@
           :rating="apartment.rating"
           :imgSrc="apartment.imgUrl"
           :price="apartment.price"
+          @click.native="handleItemClick"
         />
       </template>
     </ApartmentsList>
@@ -27,8 +28,13 @@ export default {
   },
   data() {
     return {
-      apartments
-    }
+      apartments,
+    };
+  },
+  methods: {
+    handleItemClick() {
+      console.log("item click");
+    },
   },
 };
 </script>
