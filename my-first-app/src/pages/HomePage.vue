@@ -9,11 +9,11 @@
         <template v-slot:apartment="{ apartment }">
           <ApartmentsItem
             :key="apartment.id"
+            :id="apartment.id"
             :descr="apartment.descr"
             :rating="apartment.rating"
             :imgSrc="apartment.imgUrl"
             :price="apartment.price"
-
           />
         </template>
       </ApartmentsList>
@@ -28,7 +28,6 @@ import apartments from "../components/apartment/apartments";
 import ApartmentsFilterForm from "../components/apartment/ApartmentsFilterForm";
 import Container from "../components/shared/Container";
 
-
 export default {
   name: "App",
   components: {
@@ -36,7 +35,6 @@ export default {
     ApartmentsItem,
     ApartmentsFilterForm,
     Container,
-
   },
   data() {
     return {

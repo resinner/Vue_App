@@ -13,6 +13,9 @@ import Container from "../components/shared/Container";
     name: 'ApartmentPage',
         components: {
             Container
+    },
+    mounted() {
+           this 
         }
     }
 </script>
