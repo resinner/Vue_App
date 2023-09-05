@@ -3,20 +3,20 @@
     <Avatar class="reviews-heading__avatar"/>
     <div class="reviews-heading__content">
       <span class="reviews-heading__author">{{ author }}</span>
-      <StarRating :rating="rating" />
+      <Rating :rating="rating" />
     </div>
   </div>
 </template>
 
 <script>
 
-import StarRating from "@/components/StarRating.vue";
+import Rating from "@/components/StarRating.vue";
 import Avatar from "./ReviewsAvatar.vue";
 
 export default {
   name: "ReviewsHeading",
   components: {
-    StarRating,
+    Rating,
     Avatar,
   },
   props: {

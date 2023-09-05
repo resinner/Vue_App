@@ -4,7 +4,7 @@
       <h2 class="reviews__title">Загальний рейтинг</h2>
       <div class="reviews__rating">
         <span>{{ amountOfReviews }} відгук(ів)</span>
-        <StarRating :rating="totalRating" />
+        <Rating :rating="totalRating" />
       </div>
     </div>
     <ReviewsItem
@@ -13,60 +13,61 @@
       :review="review"
     />
     <button @click="toggleReviews" class="reviews__show-more">
-    {{  buttonText }}
+      {{ buttonText }}
     </button>
   </section>
 </template>
 
 <script>
 import ReviewsItem from "./reviews-item";
-import StarRating from "../StarRating.vue";
+import Rating from "../StarRating.vue";
 
 export default {
   name: "Reviews",
   components: {
     ReviewsItem,
-    StarRating,
+    Rating,
   },
   props: {
     reviews: {
       type: Array,
       required: true,
     },
-    },
-    data() {
-        return {
-        reviewsLimit: 2
-    }
+  },
+  data() {
+    return {
+      reviewsLimit: 2,
+    };
   },
   computed: {
     totalRating() {
       const total = this.reviews.reduce((acc, review) => acc + review.rating, 0);
+      
       return total / this.reviews.length;
     },
     amountOfReviews() {
       return this.reviews.length;
-      },
-      currentReviews() {
-        return this.reviews.slice(0, this.reviewsLimit)
-      },
-      buttonText() {
-      return    this.reviewsLimit === this.reviews.length
-              ? 'Згорнути'
-        : 'Читати наступне...'
-    }
     },
+    currentReviews() {
+      return this.reviews.slice(0, this.reviewsLimit);
+    },
+    buttonText() {
+      return this.reviewsLimit === this.reviews.length
+        ? "Згорнути"
+        : "Читати наступне...";
+    },
+  },
   methods: {
     toggleReviews() {
       if (this.reviewsLimit === this.reviews.length) {
-        this.reviewsLimit = 2
-        return
+        this.reviewsLimit = 2;
+        return;
       }
 
-      this.reviewsLimit = this.reviews.length
+      this.reviewsLimit = this.reviews.length;
     },
   },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -74,7 +75,7 @@ export default {
 
 .reviews {
   margin-top: 20px;
-  //   background: $card-bg;
+  background: $card-bg;
   padding: 0 2px;
 
   &__heading {
