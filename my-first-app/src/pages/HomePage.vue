@@ -24,9 +24,9 @@
 <script>
 import ApartmentsList from "../components/apartment/ApartmentsList";
 import ApartmentsItem from "../components/apartment/ApartmentsItem";
-import apartments from "../components/apartment/apartments";
 import ApartmentsFilterForm from "../components/apartment/ApartmentsFilterForm";
 import Container from "../components/shared/Container";
+import { getApartmentsList } from "../services/apartments.service";
 
 export default {
   name: "App",
@@ -39,7 +39,7 @@ export default {
   data() {
     return {
       text: "",
-      apartments,
+      apartments: [],
       filters: {
         city: "",
         price: 0,
@@ -50,6 +50,14 @@ export default {
     filteredApartments() {
       return this.filterByCityName(this.filterByPrice(this.apartments));
     },
+  },
+  async created() {
+    try {
+      const { data } = await getApartmentsList();
+      this.apartments = data;
+    } catch (error) {
+      console.error(error);
+    }
   },
   methods: {
     filter({ city, price }) {
@@ -75,20 +83,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// #app {
-//   display: flex;
-//   flex-direction: column;
-//   min-height: 100vh;
-//   font-family: Montserrat, Helvetica, Arial, sans-serif;
-//   -webkit-font-smoothing: antialiased;
-//   -moz-osx-font-smoothing: grayscale;
-
-// }
-// .content {
-// flex-grow: 1;
-// padding-top: 120px;
-// }
-
 .apartment-filter {
   margin-bottom: 40px;
 }
