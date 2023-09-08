@@ -1,32 +1,41 @@
 <template>
   <div class="wrapper-input">
-    <input 
-    v-on="listeners"
-    v-bind="$attrs"
-    class="custom-input" 
-    :class="!isValid && 'custom-input--error'"/>
+    <input
+      v-on="listeners"
+      v-bind="$attrs"
+      @blur="blurHandler"
+      :value="value"
+      class="custom-input"
+      :class="!isValid && 'custom-input--error'"
+    />
     <span v-if="!isValid" class="custom-input__error">{{ error }}</span>
   </div>
 </template>
 
 <script>
 export default {
-  name: "CustomInput",
+  name: 'CustomInput',
   data() {
     return {
       isValid: true,
-      error: ''
+      error: '',
+      isFirstInput: true,
     };
+  },
+  inject: {
+    form: {
+      default: null,
+    },
   },
   inheritAttrs: false,
   props: {
     value: {
       type: String,
-      default: "",
+      default: '',
     },
     errorMessage: {
       type: String,
-      default: "",
+      default: '',
     },
     rules: {
       type: Array,
@@ -37,42 +46,67 @@ export default {
     listeners() {
       return {
         ...this.$listeners,
-        input: (event) => this.$emit("input", event.target.value),
+        input: (event) => this.$emit('input', event.target.value),
       };
     },
   },
   watch: {
-    value(value) {
-      this.validate(value);
-      console.log(value)
-}
+    value() {
+      if (this.isFirstInput) return;
+
+      this.validate();
+    },
+  },
+  mounted() {
+    if (!this.form) return;
+
+    this.form.registerInput(this);
+  },
+  beforeDestroy() {
+    if (!this.form) return;
+
+    this.form.unRegisterInput(this);
   },
   methods: {
-    validate(value) {
+    validate() {
       this.isValid = this.rules.every((rule) => {
-        const { hasPassed, message } = rule(value)
+        const { hasPassed, message } = rule(this.value);
 
         if (!hasPassed) {
-          this.error = message || this.errorMessage
+          this.error = message || this.errorMessage;
         }
 
         return hasPassed;
       });
+
+      return this.isValid;
+    },
+    blurHandler() {
+      if (this.isFirstInput) {
+        this.validate();
+      }
+
+      this.isFirstInput = false;
+    },
+    reset() {
+      this.isFirstInput = true;
+      this.isValid = true;
+      this.$emit('input', '');
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-@import "../../assets/scss/variables";
+@import '../../assets/scss/variables';
+
 .wrapper-input {
   position: relative;
   display: inline-flex;
 }
 
 .custom-input {
-  min-height: 40px;
-  max-width: 220px;
+  height: 40px;
   width: 100%;
   border: 2px solid $main-color;
   font-size: 18px;
@@ -84,9 +118,9 @@ export default {
     color: inherit;
   }
 
-&--error {
-  border-color: red;
-}
+  &--error {
+    border-color: red;
+  }
 
   &__error {
     position: absolute;
