@@ -59,12 +59,12 @@ export default {
       return [this.rules.isRequired, this.rules.emailValidation];
     },
     passwordRules() {
-      return [this.rules.isRequired];
+      return [this.rules.isRequired, this.rules.passwordValidation];
     },
   },
   methods: {
     handleSubmit() {
-      const isFormValid = this.$refs.form.validate;
+      const isFormValid = this.$refs.form.validate();
 
       if (isFormValid) {
         console.log(this.formData);
