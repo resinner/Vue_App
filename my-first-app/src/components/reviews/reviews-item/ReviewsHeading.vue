@@ -24,7 +24,7 @@ export default {
       type: String,
       required: true,
     },
-    reting: {
+    rating: {
       type: Number,
       default: 0,
     },
