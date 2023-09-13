@@ -110,11 +110,14 @@ export default {
 
       if (isFormValid) {
         try {
+          this.loading = true;
           const { data } = await registerUser({ name, password, email });
           console.log(data);
           form.reset();
         } catch (error) {
           console.log(error);
+        } finally {
+          this.loading = false;
         }
       }
     },

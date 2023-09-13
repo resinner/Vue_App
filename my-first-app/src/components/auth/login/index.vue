@@ -72,6 +72,7 @@ export default {
   },
   methods: {
     async handleSubmit() {
+      this.loading = true;
       const isFormValid = this.$refs.form.validate();
 
       if (isFormValid) {
@@ -80,6 +81,8 @@ export default {
                     console.log(data);
         } catch (error) {
           console.log(error);
+        } finally {
+          this.loading = false;
         }
       }
     },
