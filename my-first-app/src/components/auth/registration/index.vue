@@ -115,7 +115,11 @@ export default {
           console.log(data);
           form.reset();
         } catch (error) {
-          console.log(error);
+          this.$notify({
+            type: "error",
+            title: "Виникла помилка",
+            text: error.message,
+          });
         } finally {
           this.loading = false;
         }

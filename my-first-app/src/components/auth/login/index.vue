@@ -78,9 +78,13 @@ export default {
       if (isFormValid) {
         try {
           const { data } = await loginUser(this.formData);
-                    console.log(data);
+          console.log(data);
         } catch (error) {
-          console.log(error);
+          this.$notify({
+            type: "error",
+            title: "Виникла помилка",
+            text: error.message,
+          });
         } finally {
           this.loading = false;
         }
