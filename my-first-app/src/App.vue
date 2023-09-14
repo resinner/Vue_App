@@ -19,7 +19,7 @@ export default {
   components: {
     AppFooter,
     AppHeader,
-    Notification
+    Notification,
   },
 };
 </script>

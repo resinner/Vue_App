@@ -1,6 +1,6 @@
 <template>
   <AuthContainer class="registration">
-    <MainTitle class="registration__title">Логін</MainTitle>
+    <MainTitle class="registration__title">Реєстрація</MainTitle>
     <Form ref="form" class="registration__form" @submit.prevent="handleSubmit">
       <CustomInput
         v-model="formData.name"
@@ -54,7 +54,6 @@ import {
   passwordValidation,
   isRequired,
 } from "../../../utils/validationRules";
-import { registerUser } from "../../../services/auth.service";
 
 export default {
   name: "Registration",
@@ -111,8 +110,10 @@ export default {
       if (isFormValid) {
         try {
           this.loading = true;
-          const { data } = await registerUser({ name, password, email });
-          console.log(data);
+
+         await this.$store.dispatch('registration', { name, password, email });
+       
+          this.$router.push({ name: "homepage" });
           form.reset();
         } catch (error) {
           this.$notify({

@@ -35,7 +35,6 @@ import {
   passwordValidation,
   isRequired,
 } from "../../../utils/validationRules";
-import { loginUser } from "../../../services/auth.service";
 
 export default {
   name: "Login",
@@ -72,13 +71,16 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      this.loading = true;
-      const isFormValid = this.$refs.form.validate();
+      const { form } = this.$refs;
+      const isFormValid = form.validate();
 
       if (isFormValid) {
         try {
-          const { data } = await loginUser(this.formData);
-          console.log(data);
+          this.loading = true;
+          await this.$store.dispatch("login", this.formData);
+
+          this.$router.push({ name: "homepage" });
+          form.reset();
         } catch (error) {
           this.$notify({
             type: "error",
