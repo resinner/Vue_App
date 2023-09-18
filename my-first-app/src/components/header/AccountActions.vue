@@ -24,7 +24,9 @@
         >
       </li>
       <li class="account-actions__item">
-        <button @click="logout" class="account-actions__logout">Вийти</button>
+        <button @click="handleLogout" class="account-actions__logout">
+          Вийти
+        </button>
       </li>
     </ul>
   </div>
@@ -62,7 +64,7 @@ export default {
       } catch (error) {
         this.$notify({
           type: "error",
-          title: "Логаут не удался",
+          title: "Логаут не вдався",
         });
       }
     },
