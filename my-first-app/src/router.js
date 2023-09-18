@@ -1,11 +1,12 @@
 import VueRouter from "vue-router";
-import HomePage from "./pages/HomePage";
-import ApartmentPage from "./pages/Apartment";
 import ErrorPage from "./pages/ErrorPage";
-import LoginPage from "./pages/Login";
-import RegistrationPage from "./pages/Registration";
-import MyOrdersPage from "./pages/MyOrders";
 import store from "./store";
+
+const HomePage = () => import("./pages/HomePage");
+const ApartmentPage = () => import("./pages/Apartment");
+const LoginPage = () => import("./pages/Login");
+const RegistrationPage = () => import("./pages/Registration");
+const MyOrdersPage = () => import("./pages/MyOrders");
 
 const routes = [
   {
