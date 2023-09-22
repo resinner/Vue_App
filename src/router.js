@@ -11,7 +11,7 @@ const MyOrdersPage = () => import("./pages/MyOrders");
 
 const routes = [
   {
-    path: "/",
+    path: "/Vue_App/",
     component: HomePage,
     name: "homepage",
   },
