@@ -2,7 +2,7 @@
   <header class="header">
     <Container>
       <div class="header__content">
-        <router-link to="/testvue/">
+        <router-link to="/Vue_App/">
           <Logo></Logo>
         </router-link>
         <AccountActions v-if="isLoggedIn"/>
